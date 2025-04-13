@@ -90,7 +90,7 @@ ai-restaurant-gen/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourname/ai-restaurant-gen.git
+git clone https://github.com/yourname/ai-restaurant-gen.git](https://github.com/PeilunLu053/restaurantAI.git
 cd ai-restaurant-gen
 ```
 
