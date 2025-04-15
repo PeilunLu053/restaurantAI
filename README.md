@@ -41,46 +41,71 @@ This project empowers restaurant teams without editing experience to launch soci
 ```
 ai-restaurant-gen/
 ├── backend/                 # ✅ Backend service (FastAPI APIs and business logic)
-│   ├── main.py              # Project entry point – starts FastAPI app
-│   ├── routes/              # API route definitions (e.g., /generate, /tts, /cut)
-│   │   └── video.py
-│   ├── services/            # Logic layer: model inference, editing, TTS, etc.
-│   │   ├── generator.py     # Calls Qwen2.5 for copy/script generation
-│   │   ├── tts.py           # Handles Edge-TTS voice synthesis
-│   │   └── editor.py        # Automates video editing with moviepy/ffmpeg
-│   └── schemas/             # Pydantic data models for request/response validation
-│       └── video_schema.py
+│   ├── main.py              # Entry point to start the FastAPI app
+│   ├── routers/             # API route definitions (e.g., /copywriting, /editing)
+│   │   ├── copywriting.py   # Generate restaurant/dish promotional content
+│   │   ├── scripts.py       # Generate video shooting scripts
+│   │   ├── editing.py       # Handle video editing operations
+│   │   ├── publish.py       # Publish videos to platforms like TikTok, Xiaohongshu
+│   │   └── feedback.py      # Video performance analytics and feedback
+│   ├── services/            # Logic layer (LLM generation, video editing, API calls)
+│   │   ├── llm_generator.py # Use Qwen2.5-7B Omni for script and copywriting
+│   │   ├── ai_editor.py     # Automate editing using moviepy or ffmpeg
+│   │   ├── platform_api.py  # Integrate with social media APIs
+│   ├── utils/               # Utility functions (timing analysis, video tools)
+│   │   ├── timing_analysis.py
+│   │   └── video_tools.py
+│   ├── schemas/             # Pydantic schemas for request/response validation
+│   │   └── video_schema.py
+│   └── config.py            # Environment and app configuration
 │
-├── frontend/                # ✅ Frontend UI (Flutter or Electron + Vue)
-│   ├── flutter/             # Flutter project for mobile & web support
-│   └── electron-vue/        # Electron desktop app (recommended for MVP)
+├── frontend/                # ✅ Frontend UI (Flutter or Electron+Vue)
+│   ├── flutter/             # Flutter project for mobile and web
+│   │   ├── lib/
+│   │   │   ├── main.dart
+│   │   │   ├── routes/
+│   │   │   ├── screens/
+│   │   │   ├── widgets/
+│   │   │   ├── services/
+│   │   │   ├── models/
+│   │   │   ├── constants/
+│   │   │   └── utils/
+│   │   ├── assets/
+│   │   └── pubspec.yaml
+│   └── electron-vue/        # Desktop app built with Electron + Vue
 │       ├── src/
 │       ├── public/
 │       └── main.js
 │
-├── models/                  # ✅ Model wrappers and configurations
-│   ├── qwen_wrapper.py      # Qwen2.5 or DeepSeek model API wrapper
-│   ├── cutgpt_wrapper.py    # Wrapper for LLM-based cut/script generation
-│   └── lora_config/         # LoRA training configurations (if needed)
+├── models/                  # ✅ AI model wrappers and configurations
+│   ├── llm/                 # Language model (Qwen2.5-7B Omni)
+│   │   └── qwen2.5-7b-omni/
+│   ├── edit_model/          # Optional editing assistance models
+│   │   └── auto_editor_model/
+│   ├── qwen_wrapper.py      # Wrapper for Qwen2.5-7B Omni API
+│   ├── cutgpt_wrapper.py    # Script generation wrapper (optional)
+│   └── lora_config/         # LoRA config files (for model fine-tuning if needed)
 │       └── config.json
 │
-├── data/                    # ✅ Uploaded media and input/output files
-│   ├── uploads/             # User-uploaded raw video footage
-│   ├── images/              # Uploaded image materials / poster shots
-│   └── voices/              # Generated voice files (.mp3)
+├── data/                    # ✅ Uploaded media and intermediate files
+│   ├── raw_videos/          # User-uploaded original video files
+│   ├── images/              # Poster-style images or stills
+│   ├── voices/              # Generated voice-over files (e.g., .mp3)
+│   └── generated_scripts/   # AI-generated video scripts
 │
 ├── output/                  # ✅ Final exported content and logs
-│   ├── videos/              # Output videos (.mp4)
-│   └── logs/                # Backend logs and error reports
+│   ├── final_videos/        # Rendered videos (e.g., .mp4)
+│   └── analytics/           # Video performance and backend logs
 │
-├── scripts/                 # ✅ Automation tools and batch scripts
-│   ├── run_all.py           # One-click pipeline: from generation to editing
-│   ├── launch_backend.sh    # Script to launch backend server
-│   └── test_demo.ipynb      # Jupyter notebook for API testing/demo
+├── scripts/                 # ✅ Automation and testing scripts
+│   ├── run_all.py           # One-click generation pipeline (script → edit → publish)
+│   ├── launch_backend.sh    # Shell script to launch backend server
+│   └── test_demo.ipynb      # Jupyter notebook for API demo/testing
 │
-├── .env.example             # Environment variable sample
-├── requirements.txt         # Python dependencies
-└── README.md                # This document
+├── .env.example             # Sample environment variable file
+├── requirements.txt         # Python dependencies list
+└── README.md                # Project documentation
+
 ```
 
 ---
