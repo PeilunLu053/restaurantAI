@@ -134,6 +134,10 @@ cd backend
 uvicorn main:app --reload
 ```
 
+## 📦 Current Status
+
+The repository contains an initial FastAPI backend and placeholder directories for frontend and models.
+
 ---
 
 ## 🔮 Roadmap
